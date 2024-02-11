@@ -1,0 +1,22 @@
+INSERT INTO product (name, description, price, brand, model, stock_quantity, min_stock_quantity, category, image_url, created_at)
+VALUES
+    ('Buzdolabı', 'Yüksek kapasiteli, enerji verimli buzdolabı. Geniş iç hacmi ile yiyecek ve içeceklerinizi düzenli bir şekilde saklayın.', 1499.99, 'Samsung', 'RB38T674DSA', 50, 5, 'Ev Aletleri', 'fridge.jpg', CURRENT_TIMESTAMP),
+    ('Kalem Seti', 'Kaliteli kalem seti, çeşitli renklerde ve uç tiplerinde kalemleri içerir. Hem öğrenciler hem de profesyoneller için ideal.', 19.99, 'Faber-Castell', 'Grip X5', 100, 10, 'Kırtasiye', 'pencil_set.jpg', CURRENT_TIMESTAMP),
+    ('Kitap - Bilim ve Teknoloji', 'Bilim ve teknoloji dünyasının en güncel gelişmelerini anlatan ilgi çekici bir kitap. Her yaştan okuyucuya hitap eder.', 29.99, 'National Geographic', 'The New Cosmos', 30, 3, 'Kitap', 'book_science.jpg', CURRENT_TIMESTAMP),
+    ('Akıllı Telefon', 'Yüksek performanslı akıllı telefon. Gelişmiş kamera sistemleri ve uzun pil ömrü ile dikkat çeker.', 899.99, 'Apple', 'iPhone 13', 40, 4, 'Elektronik', 'phone.jpg', CURRENT_TIMESTAMP),
+    ('Spor Ayakkabı', 'Rahat ve şık spor ayakkabı. Her türlü spor aktivitesi için uygundur.', 79.99, 'Nike', 'Air Max', 150, 15, 'Spor', 'sports_shoes.jpg', CURRENT_TIMESTAMP),
+    ('Kahve Makinesi', 'Lezzetli kahve hazırlamanın en kolay yolu. Farklı kahve çeşitleri için özel programlar içerir.', 249.99, 'Bosch', 'Tassimo', 25, 2, 'Ev Aletleri', 'coffee_machine.jpg', CURRENT_TIMESTAMP),
+    ('Çocuk Oyun Seti', 'Çocuklar için eğlenceli ve eğitici oyun seti. Yaratıcılıklarını geliştirmelerine yardımcı olur.', 49.99, 'LEGO', 'Creative Box', 80, 8, 'Oyuncak', 'kids_toy.jpg', CURRENT_TIMESTAMP),
+    ('Bluetooth Kulaklık', 'Kablosuz ve yüksek ses kalitesine sahip Bluetooth kulaklık. Uzun pil ömrü ile gün boyu müzik dinlemenizi sağlar.', 129.99, 'Sony', 'WH-1000XM4', 60, 6, 'Elektronik', 'headphones.jpg', CURRENT_TIMESTAMP),
+    ('Mutfak Robotu', 'Mutfak işlerini kolaylaştıran çok fonksiyonlu mutfak robotu. Farklı yemekleri hazırlamak için idealdir.', 299.99, 'Kenwood', 'Chef Titanium', 35, 3, 'Ev Aletleri', 'kitchen_robot.jpg', CURRENT_TIMESTAMP),
+    ('Akıllı Saat', 'Sağlık takibi ve günlük aktiviteleri izleme özellikleri ile akıllı saat. Şık tasarımı ile dikkat çeker.', 199.99, 'Samsung', 'Galaxy Watch 4', 45, 4, 'Elektronik', 'smart_watch.jpg', CURRENT_TIMESTAMP),
+    ('Oyun Konsolu', 'Son teknolojiye sahip oyun konsolu. En yeni oyunları oynamak için ideal bir seçenektir.', 499.99, 'Sony', 'PlayStation 5', 30, 3, 'Oyun & Eğlence', 'game_console.jpg', CURRENT_TIMESTAMP),
+    ('Güneş Gözlüğü', 'Tarzınızı tamamlayan şık güneş gözlüğü. Güneşin zararlı ışınlarından korur.', 69.99, 'Ray-Ban', 'Aviator', 120, 12, 'Moda', 'sunglasses.jpg', CURRENT_TIMESTAMP),
+    ('Fitness Matı', 'Evde veya spor salonunda kullanılmak üzere tasarlanmış fitness matı. Konforlu ve kaymaz yüzeye sahiptir.', 29.99, 'Reebok', 'Comfort Mat', 90, 9, 'Spor', 'fitness_mat.jpg', CURRENT_TIMESTAMP),
+    ('Güvenlik Kamerası', 'Ev ve işyeri güvenliğiniz için HD güvenlik kamerası. Uzaktan izleme özelliği ile her an güvende hissedin.', 179.99, 'Arlo', 'Pro 3', 40, 4, 'Güvenlik', 'security_camera.jpg', CURRENT_TIMESTAMP),
+    ('Bisiklet', 'Şehir içi ulaşım için ideal şehir bisikleti. Hafif ve dayanıklı tasarımı ile rahat bir sürüş sağlar.', 399.99, 'Giant', 'Escape', 20, 2, 'Spor', 'bike.jpg', CURRENT_TIMESTAMP),
+    ('Taşınabilir Hoparlör', 'Taşınabilir ve suya dayanıklı Bluetooth hoparlör. Açık hava etkinlikleri için mükemmel bir eşlikçidir.', 89.99, 'JBL', 'Charge 5', 70, 7, 'Elektronik', 'portable_speaker.jpg', CURRENT_TIMESTAMP),
+    ('Güç Bankası', 'Taşınabilir güç bankası. Telefonunuzu her an şarj etmek için ideal bir çözümdür.', 49.99, 'Anker', 'PowerCore', 100, 10, 'Elektronik', 'power_bank.jpg', CURRENT_TIMESTAMP),
+    ('Güzel Sanatlar Seti', 'Çeşitli resim malzemelerini içeren güzel sanatlar seti. Sanatınızı keşfetmek için mükemmel bir başlangıç.', 59.99, 'Winsor & Newton', 'Art Set', 40, 4, 'Sanat & El Sanatları', 'art_set.jpg', CURRENT_TIMESTAMP),
+    ('Deri Cüzdan', 'Şık tasarımlı deri cüzdan. Kartlarınızı düzenli bir şekilde saklamak için idealdir.', 39.99, 'Fossil', 'Graham', 80, 8, 'Moda', 'wallet.jpg', CURRENT_TIMESTAMP),
+    ('Robot Süpürge', 'Akıllı robot süpürge. Zemininizi temizlemek ve tozu emmek için kendi başına hareket eder.', 199.99, 'iRobot', 'Roomba 675', 25, 2, 'Ev Aletleri', 'robot_vacuum.jpg', CURRENT_TIMESTAMP);
