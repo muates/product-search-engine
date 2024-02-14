@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -52,7 +53,8 @@ public class ProductEntity implements Serializable {
     @Column(length = 255)
     private String imageUrl;
 
+    @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
-    @Column(nullable = false)
+    @Column(nullable = false, updatable = false)
     private Date createdAt;
 }
