@@ -1,5 +1,7 @@
 package com.muates.productservice.service.impl;
 
+import com.muates.elasticsearchproductservice.model.ProductIndex;
+import com.muates.elasticsearchproductservice.service.ElasticProductService;
 import com.muates.productservice.exception.ProductDeletionException;
 import com.muates.productservice.exception.ProductNotFoundException;
 import com.muates.productservice.model.dto.request.ProductRequest;
@@ -14,6 +16,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
@@ -25,21 +28,28 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductTransformer<ProductRequest, ProductEntity> requestToEntity;
+    private final ProductTransformer<ProductEntity, ProductIndex> entityToIndex;
     private final UpdateService<ProductEntity, ProductUpdateRequest> updateService;
+    private final ElasticProductService elasticProductService;
 
     public ProductServiceImpl(ProductRepository productRepository,
                               ProductTransformer<ProductRequest, ProductEntity> requestToEntity,
-                              UpdateService<ProductEntity, ProductUpdateRequest> updateService) {
+                              ProductTransformer<ProductEntity, ProductIndex> entityToIndex,
+                              UpdateService<ProductEntity, ProductUpdateRequest> updateService,
+                              ElasticProductService elasticProductService) {
         this.productRepository = productRepository;
         this.requestToEntity = requestToEntity;
+        this.entityToIndex = entityToIndex;
         this.updateService = updateService;
+        this.elasticProductService = elasticProductService;
     }
 
     @Override
     public ProductEntity createProduct(ProductRequest request) {
         LOGGER.info("Starting product creation process for product with name: {}", request.getName());
         ProductEntity productEntity = productRepository.save(requestToEntity.transform(request));
-        LOGGER.info("Product creation process completed. Created product: {}", productEntity);
+        List<UUID> id = elasticProductService.save(List.of(entityToIndex.transform(productEntity)));
+        LOGGER.info("Product creation process completed. Created product: {}, ID: {}", productEntity, id);
         return productEntity;
     }
 
