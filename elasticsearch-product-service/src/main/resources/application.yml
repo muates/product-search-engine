@@ -1,7 +1,7 @@
 server:
   port: 8091
   servlet:
-    context-path: /elasticsearch-product-service
+    context-path: /elastic-product-service
 
 elastic-config:
   index-name: product-index

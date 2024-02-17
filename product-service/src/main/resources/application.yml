@@ -20,3 +20,9 @@ spring:
     schema: classpath:init-schema.sql
     data: classpath:init-data.sql
     initialization-mode: always
+
+elastic-config:
+  index-name: product-index
+  connection-url: http://localhost:9200
+  connect-timeout-ms: 5000
+  socket-timeout-ms: 30000
