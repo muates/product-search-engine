@@ -1,11 +1,16 @@
 package com.muates.elasticsearchproductservice.model;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Builder;
 import lombok.Data;
 
+import org.springframework.data.elasticsearch.annotations.DateFormat;
 import org.springframework.data.elasticsearch.annotations.Document;
+import org.springframework.data.elasticsearch.annotations.Field;
+import org.springframework.data.elasticsearch.annotations.FieldType;
 
+import java.util.Date;
 import java.util.UUID;
 
 @Data
@@ -43,6 +48,7 @@ public class ProductIndex {
     @JsonProperty
     private String imageUrl;
 
-    @JsonProperty
-    private String createdAt;
+    @Field(type = FieldType.Date, format = DateFormat.date_time)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+    private Date createdAt;
 }
