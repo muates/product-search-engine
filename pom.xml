@@ -32,6 +32,13 @@
 
     <dependencyManagement>
         <dependencies>
+            <!-- Local -->
+            <dependency>
+                <groupId>com.muates</groupId>
+                <artifactId>elasticsearch-product-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+
             <!-- Spring Boot Starter Web -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>

@@ -12,6 +12,12 @@
     <artifactId>product-service</artifactId>
 
     <dependencies>
+        <!-- Local -->
+        <dependency>
+            <groupId>com.muates</groupId>
+            <artifactId>elasticsearch-product-service</artifactId>
+        </dependency>
+
         <!-- Spring Boot Starter Web -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
