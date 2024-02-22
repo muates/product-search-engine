@@ -36,7 +36,7 @@ public class ElasticProductServiceImpl implements ElasticProductService {
     public List<UUID> save(List<ProductIndex> documents) {
         List<ProductIndex> response = (List<ProductIndex>) elasticProductRepository.saveAll(documents);
         List<UUID> ids = response.stream().map(ProductIndex::getId).collect(Collectors.toList());
-        LOGGER.info("Saved {} documents to Elasticsearch with IDs: {}", documents.size(), ids);
+        LOGGER.info("Saved {} products to Elasticsearch with IDs: {}", documents.size(), ids);
         return ids;
     }
 
@@ -50,7 +50,7 @@ public class ElasticProductServiceImpl implements ElasticProductService {
 
         if (isUUID(query)) {
             UUID id = UUID.fromString(query);
-            ProductIndex product = elasticProductRepository.findById(id).orElse(null);
+            ProductIndex product = this.getProductById(id);
             searchResults = (product != null) ? Collections.singletonList(product) : Collections.emptyList();
             logProductSearchResult(query, searchResults);
         } else {
@@ -113,6 +113,23 @@ public class ElasticProductServiceImpl implements ElasticProductService {
         }
 
         return searchResults;
+    }
+
+    @Override
+    public ProductIndex getProductById(UUID id) {
+        return elasticProductRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public void updateProduct(ProductIndex document) {
+        elasticProductRepository.save(document);
+        LOGGER.info("Product updated successfully: ProductID={}", document.getId());
+    }
+
+    @Override
+    public void deleteProduct(UUID id) {
+        elasticProductRepository.deleteById(id);
+        LOGGER.info("Product deletion completed successfully. Product ID: {}", id);
     }
 
     private void logProductSearchResult(String query, List<ProductIndex> searchResults) {
