@@ -13,10 +13,9 @@ import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.query.NativeSearchQueryBuilder;
 import org.springframework.stereotype.Service;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Service
 public class ElasticProductServiceImpl implements ElasticProductService {
@@ -56,52 +55,24 @@ public class ElasticProductServiceImpl implements ElasticProductService {
         } else {
             String[] queryParts = query.split("\\s+");
 
-            String name = null;
-            String brand = null;
-            String model = null;
-            String category = null;
-            int minMatchFields = 0;
-
-            for (String part : queryParts) {
-                if (elasticProductRepository.countByCategory(part) > 0) {
-                    category = (category != null) ? category + " " + part: part;
-                    continue;
-                }
-                if (elasticProductRepository.countByBrand(part) > 0) {
-                    brand = (brand != null) ? brand + " " + part : part;
-                    continue;
-                }
-
-                if (elasticProductRepository.countByModel(part) > 0) {
-                    model = (model != null) ? model + " " + part : part;
-                    continue;
-                }
-                if (elasticProductRepository.countByName(part) > 0) {
-                    name = (name != null) ? (name + " " + part) : part;
-                }
-            }
+            Map<String, Integer> boosts = Map.of(
+                    "name", 1,
+                    "brand", 2,
+                    "model", 2,
+                    "category", 1
+            );
 
             BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
-
-            if (name != null) {
-                boolQuery.should(QueryBuilders.matchQuery("name", name).boost(1));
-                minMatchFields++;
-            }
-
-            if (brand != null) {
-                boolQuery.should(QueryBuilders.matchQuery("brand", brand).boost(2));
-                minMatchFields++;
-            }
-
-            if (model != null) {
-                boolQuery.should(QueryBuilders.matchQuery("model", model).boost(2));
-                minMatchFields++;
-            }
-
-            if (category != null) {
-                boolQuery.should(QueryBuilders.matchQuery("category", category).boost(1));
-                minMatchFields++;
-            }
+            int minMatchFields = (int) Arrays.stream(queryParts)
+                    .filter(part -> Stream.of("category", "brand", "model", "name")
+                            .anyMatch(field -> countByField(field, part) > 0))
+                    .peek(part -> {
+                        Stream.of("category", "brand", "model", "name")
+                                .filter(field -> countByField(field, part) > 0)
+                                .findFirst()
+                                .ifPresent(field -> boolQuery.should(QueryBuilders.matchQuery(field, part).boost(boosts.get(field))));
+                    })
+                    .count();
 
             boolQuery.minimumShouldMatch(minMatchFields);
 
@@ -130,6 +101,13 @@ public class ElasticProductServiceImpl implements ElasticProductService {
     public void deleteProduct(UUID id) {
         elasticProductRepository.deleteById(id);
         LOGGER.info("Product deletion completed successfully. Product ID: {}", id);
+    }
+
+    private long countByField(String field, String value) {
+        return elasticsearchRestTemplate.search(new NativeSearchQueryBuilder()
+                .withQuery(QueryBuilders.matchQuery(field, value))
+                .build(), ProductIndex.class)
+                .getTotalHits();
     }
 
     private void logProductSearchResult(String query, List<ProductIndex> searchResults) {
