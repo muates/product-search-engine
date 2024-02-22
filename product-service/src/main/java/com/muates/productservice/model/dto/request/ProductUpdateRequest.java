@@ -15,8 +15,8 @@ public class ProductUpdateRequest {
     private Double price;
     private String brand;
     private String model;
-    private int stockQuantity;
-    private int minStockQuantity;
+    private Integer stockQuantity;
+    private Integer minStockQuantity;
     private String category;
     private String imageUrl;
 }
