@@ -71,10 +71,9 @@ public class ProductServiceImpl implements ProductService {
         LOGGER.info("Attempting to update product with ID: {}", id);
 
         ProductEntity existingProductEntity = this.getProduct(id);
-
         updateService.update(existingProductEntity, request);
-
         productRepository.save(existingProductEntity);
+        elasticProductService.updateProduct(entityToIndex.transform(existingProductEntity));
 
         LOGGER.info("Product updated successfully. Updated product: {}", existingProductEntity);
 
@@ -85,6 +84,7 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(UUID id) {
         try {
             productRepository.deleteById(id);
+            elasticProductService.deleteProduct(id);
             LOGGER.info("Product deletion completed successfully. Product ID: {}", id);
         } catch (Exception e) {
             LOGGER.error("An error occurred while deleting the product. Product ID: {}", id, e);
