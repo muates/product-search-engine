@@ -8,8 +8,5 @@ import java.util.UUID;
 
 @Repository
 public interface ElasticProductRepository extends ElasticsearchRepository<ProductIndex, UUID> {
-    Long countByName(String name);
-    Long countByCategory(String category);
-    Long countByBrand(String brand);
-    Long countByModel(String model);
+
 }
