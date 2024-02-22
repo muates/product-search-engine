@@ -63,7 +63,7 @@ public class ElasticProductServiceImpl implements ElasticProductService {
             );
 
             BoolQueryBuilder boolQuery = QueryBuilders.boolQuery();
-            int minMatchFields = (int) Arrays.stream(queryParts)
+            byte minMatchFields = (byte) Arrays.stream(queryParts)
                     .filter(part -> Stream.of("category", "brand", "model", "name")
                             .anyMatch(field -> countByField(field, part) > 0))
                     .peek(part -> {
