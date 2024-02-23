@@ -7,6 +7,7 @@
     <modules>
         <module>product-service</module>
         <module>elasticsearch-product-service</module>
+        <module>product-web</module>
     </modules>
 
     <groupId>com.muates</groupId>
@@ -28,6 +29,7 @@
         <lombok.version>1.18.24</lombok.version>
         <postgresql.version>42.2.16</postgresql.version>
         <elastic.version>7.9.1</elastic.version>
+        <bootstrap.version>4.5.2</bootstrap.version>
     </properties>
 
     <dependencyManagement>
@@ -36,6 +38,11 @@
             <dependency>
                 <groupId>com.muates</groupId>
                 <artifactId>elasticsearch-product-service</artifactId>
+                <version>${project.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.muates</groupId>
+                <artifactId>product-service</artifactId>
                 <version>${project.version}</version>
             </dependency>
 
@@ -93,6 +100,27 @@
                 <groupId>org.elasticsearch.client</groupId>
                 <artifactId>elasticsearch-rest-high-level-client</artifactId>
                 <version>${elastic.version}</version>
+            </dependency>
+
+            <!-- Bootstrap -->
+            <dependency>
+                <groupId>org.webjars</groupId>
+                <artifactId>bootstrap</artifactId>
+                <version>${bootstrap.version}</version>
+            </dependency>
+
+            <!-- Spring Boot Starter Webflux -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-webflux</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
+            <!-- Spring Boot Starter Thymeleaf -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-thymeleaf</artifactId>
+                <version>${spring-boot.version}</version>
             </dependency>
 
             <!-- Spring Boot Starter Test -->

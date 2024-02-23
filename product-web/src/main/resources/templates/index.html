@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Search</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="./css/index.css">
+</head>
+<body>
+
+<!-- Header -->
+<header>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container">
+            <a class="navbar-brand" href="#">Product Search</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+                    aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
+
+<!-- Search Form -->
+<div class="container mt-5 d-flex justify-content-center">
+    <form action="/product-web/search" method="get" class="form-inline">
+        <div class="form-group mb-2">
+            <label for="query" class="sr-only">Search:</label>
+            <input type="text" id="query" name="query" class="form-control search-input" placeholder="Search" required>
+        </div>
+        <button type="submit" class="btn btn-primary mb-2 search-button">Search</button>
+    </form>
+</div>
+
+<!-- Search Results -->
+<div class="container mt-3 search-results" th:if="${not #lists.isEmpty(searchResults)}">
+    <h4>Search Results:</h4>
+    <div class="row">
+        <div th:each="result : ${searchResults}" class="col-md-3 mb-3">
+            <div class="card h-100">
+                <div class="card-body">
+                    <p><strong>Name:</strong> <span th:text="${result.name}"></span></p>
+                    <p><strong>Brand:</strong> <span th:text="${result.brand}"></span></p>
+                    <p><strong>Model:</strong> <span th:text="${result.model}"></span></p>
+                    <p><strong>Category:</strong> <span th:text="${result.category}"></span></p>
+                    <p><strong>Description:</strong> <span th:text="${result.description}"></span></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container mt-3 d-flex justify-content-center" th:if="${#lists.isEmpty(searchResults)}">
+    <h5>No results found.</h5>
+</div>
+
+<!-- Footer -->
+<footer class="footer">
+    <p>© 2024 Product Search</p>
+</footer>
+
+</body>
+</html>
