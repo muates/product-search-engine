@@ -74,6 +74,8 @@ public class ElasticProductServiceImpl implements ElasticProductService {
                     })
                     .count();
 
+            if (minMatchFields == 0) return Collections.emptyList();
+
             boolQuery.minimumShouldMatch(minMatchFields);
 
             SearchHits<ProductIndex> searchHits = elasticsearchRestTemplate.search(
