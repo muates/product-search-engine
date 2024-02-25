@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>elasticsearch-product-service</artifactId>
+    <artifactId>elastic-product-service</artifactId>
 
     <dependencies>
         <!-- Spring Boot Starter Web -->
@@ -40,6 +40,12 @@
         <dependency>
             <groupId>org.elasticsearch.client</groupId>
             <artifactId>elasticsearch-rest-high-level-client</artifactId>
+        </dependency>
+
+        <!-- Spring Cloud Starter Config -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
 
         <!-- Spring Boot Starter Test -->

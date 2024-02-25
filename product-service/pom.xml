@@ -15,7 +15,7 @@
         <!-- Local -->
         <dependency>
             <groupId>com.muates</groupId>
-            <artifactId>elasticsearch-product-service</artifactId>
+            <artifactId>elastic-product-service</artifactId>
         </dependency>
 
         <!-- Spring Boot Starter Web -->
@@ -46,6 +46,12 @@
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <!-- Spring Cloud Starter Config -->
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
 
         <!-- Spring Boot Starter Test -->
