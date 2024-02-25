@@ -1,7 +1,5 @@
 package com.muates.productservice.service.impl;
 
-import com.muates.elasticproductservice.model.ProductIndex;
-import com.muates.elasticproductservice.service.ElasticProductService;
 import com.muates.productservice.exception.ProductDeletionException;
 import com.muates.productservice.exception.ProductNotFoundException;
 import com.muates.productservice.model.dto.request.ProductRequest;
@@ -10,6 +8,7 @@ import com.muates.productservice.model.entity.ProductEntity;
 import com.muates.productservice.repository.ProductRepository;
 import com.muates.productservice.service.ProductService;
 import com.muates.productservice.service.UpdateService;
+import com.muates.productservice.service.delegate.ElasticProductDelegateService;
 import com.muates.productservice.transformer.ProductTransformer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,27 +27,24 @@ public class ProductServiceImpl implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductTransformer<ProductRequest, ProductEntity> requestToEntity;
-    private final ProductTransformer<ProductEntity, ProductIndex> entityToIndex;
     private final UpdateService<ProductEntity, ProductUpdateRequest> updateService;
-    private final ElasticProductService elasticProductService;
+    private final ElasticProductDelegateService elasticProductDelegateService;
 
     public ProductServiceImpl(ProductRepository productRepository,
                               ProductTransformer<ProductRequest, ProductEntity> requestToEntity,
-                              ProductTransformer<ProductEntity, ProductIndex> entityToIndex,
                               UpdateService<ProductEntity, ProductUpdateRequest> updateService,
-                              ElasticProductService elasticProductService) {
+                              ElasticProductDelegateService elasticProductDelegateService) {
         this.productRepository = productRepository;
         this.requestToEntity = requestToEntity;
-        this.entityToIndex = entityToIndex;
         this.updateService = updateService;
-        this.elasticProductService = elasticProductService;
+        this.elasticProductDelegateService = elasticProductDelegateService;
     }
 
     @Override
     public ProductEntity createProduct(ProductRequest request) {
         LOGGER.info("Starting product creation process for product with name: {}", request.getName());
         ProductEntity productEntity = productRepository.save(requestToEntity.transform(request));
-        List<UUID> id = elasticProductService.save(List.of(entityToIndex.transform(productEntity)));
+        List<UUID> id = elasticProductDelegateService.saveProducts(List.of(productEntity));
         LOGGER.info("Product creation process completed. Created product: {}, ID: {}", productEntity, id);
         return productEntity;
     }
@@ -73,7 +69,7 @@ public class ProductServiceImpl implements ProductService {
         ProductEntity existingProductEntity = this.getProduct(id);
         updateService.update(existingProductEntity, request);
         productRepository.save(existingProductEntity);
-        elasticProductService.updateProduct(entityToIndex.transform(existingProductEntity));
+        elasticProductDelegateService.updateProduct(existingProductEntity);
 
         LOGGER.info("Product updated successfully. Updated product: {}", existingProductEntity);
 
@@ -84,7 +80,7 @@ public class ProductServiceImpl implements ProductService {
     public void deleteProduct(UUID id) {
         try {
             productRepository.deleteById(id);
-            elasticProductService.deleteProduct(id);
+            elasticProductDelegateService.deleteProduct(id);
             LOGGER.info("Product deletion completed successfully. Product ID: {}", id);
         } catch (Exception e) {
             LOGGER.error("An error occurred while deleting the product. Product ID: {}", id, e);
