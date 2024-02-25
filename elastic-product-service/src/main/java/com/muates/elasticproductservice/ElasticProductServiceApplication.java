@@ -1,4 +1,4 @@
-package com.muates.elasticsearchproductservice;
+package com.muates.elasticproductservice;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

@@ -1,7 +1,7 @@
 package com.muates.productservice.service.impl;
 
-import com.muates.elasticsearchproductservice.model.ProductIndex;
-import com.muates.elasticsearchproductservice.service.ElasticProductService;
+import com.muates.elasticproductservice.model.ProductIndex;
+import com.muates.elasticproductservice.service.ElasticProductService;
 import com.muates.productservice.exception.ProductDeletionException;
 import com.muates.productservice.exception.ProductNotFoundException;
 import com.muates.productservice.model.dto.request.ProductRequest;

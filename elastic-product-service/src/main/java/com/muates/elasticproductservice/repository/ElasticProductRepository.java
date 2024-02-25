@@ -1,6 +1,6 @@
-package com.muates.elasticsearchproductservice.repository;
+package com.muates.elasticproductservice.repository;
 
-import com.muates.elasticsearchproductservice.model.ProductIndex;
+import com.muates.elasticproductservice.model.ProductIndex;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.stereotype.Repository;
 

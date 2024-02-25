@@ -1,6 +1,6 @@
-package com.muates.elasticsearchproductservice.config;
+package com.muates.elasticproductservice.config;
 
-import com.muates.elasticsearchproductservice.config.data.ElasticConfigData;
+import com.muates.elasticproductservice.config.data.ElasticConfigData;
 import org.apache.http.HttpHost;
 import org.elasticsearch.client.RestClient;
 import org.elasticsearch.client.RestHighLevelClient;
@@ -16,7 +16,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import java.util.Objects;
 
 @Configuration
-@EnableElasticsearchRepositories(basePackages = "com.muates.elasticsearchproductservice")
+@EnableElasticsearchRepositories(basePackages = "com.muates.elasticproductservice")
 public class ElasticConfig extends AbstractElasticsearchConfiguration {
 
     private final ElasticConfigData elasticsearchConfigData;

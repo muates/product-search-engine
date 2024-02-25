@@ -1,6 +1,6 @@
-package com.muates.elasticsearchproductservice.service;
+package com.muates.elasticproductservice.service;
 
-import com.muates.elasticsearchproductservice.model.ProductIndex;
+import com.muates.elasticproductservice.model.ProductIndex;
 
 import java.util.List;
 import java.util.UUID;

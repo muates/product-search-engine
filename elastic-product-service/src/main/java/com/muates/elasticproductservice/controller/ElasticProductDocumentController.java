@@ -1,7 +1,7 @@
-package com.muates.elasticsearchproductservice.controller;
+package com.muates.elasticproductservice.controller;
 
-import com.muates.elasticsearchproductservice.model.ProductIndex;
-import com.muates.elasticsearchproductservice.service.ElasticProductService;
+import com.muates.elasticproductservice.model.ProductIndex;
+import com.muates.elasticproductservice.service.ElasticProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

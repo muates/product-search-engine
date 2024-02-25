@@ -1,4 +1,4 @@
-package com.muates.elasticsearchproductservice.model;
+package com.muates.elasticproductservice.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;

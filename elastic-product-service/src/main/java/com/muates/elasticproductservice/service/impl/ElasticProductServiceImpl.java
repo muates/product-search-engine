@@ -1,8 +1,8 @@
-package com.muates.elasticsearchproductservice.service.impl;
+package com.muates.elasticproductservice.service.impl;
 
-import com.muates.elasticsearchproductservice.model.ProductIndex;
-import com.muates.elasticsearchproductservice.repository.ElasticProductRepository;
-import com.muates.elasticsearchproductservice.service.ElasticProductService;
+import com.muates.elasticproductservice.model.ProductIndex;
+import com.muates.elasticproductservice.repository.ElasticProductRepository;
+import com.muates.elasticproductservice.service.ElasticProductService;
 import org.elasticsearch.index.query.BoolQueryBuilder;
 import org.elasticsearch.index.query.QueryBuilders;
 import org.slf4j.Logger;
