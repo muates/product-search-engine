@@ -1,0 +1,14 @@
+server:
+  port: 8091
+  servlet:
+    context-path: /elastic-product-service
+
+spring:
+  application:
+    name: elastic-product-service
+
+elastic-config:
+  index-name: product-index
+  connection-url: http://localhost:9200
+  connect-timeout-ms: 5000
+  socket-timeout-ms: 30000

@@ -1,6 +1,6 @@
 package com.muates.productservice.transformer.impl;
 
-import com.muates.elasticsearchproductservice.model.ProductIndex;
+import com.muates.elasticproductservice.model.ProductIndex;
 import com.muates.productservice.model.entity.ProductEntity;
 import com.muates.productservice.transformer.ProductTransformer;
 import org.springframework.stereotype.Component;
